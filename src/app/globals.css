@@ -11,8 +11,8 @@
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.15 0.02 231.5);
   /* Updated primary color from blue to green */
-  --primary: oklch(0.55 0.22 142);
-  --primary-foreground: oklch(0.98 0.001 231.5);
+  --primary: oklch(0.6 0.15 230); 
+  --primary-foreground: oklch(0.98 0.001 231.5); 
   --secondary: oklch(0.92 0.05 142);
   --secondary-foreground: oklch(0.15 0.02 231.5);
   --muted: oklch(0.94 0.01 231.5);
@@ -47,7 +47,7 @@
   --card-foreground: oklch(0.95 0.01 231.5);
   --popover: oklch(0.18 0.01 231.5);
   --popover-foreground: oklch(0.95 0.01 231.5);
-  --primary: oklch(0.65 0.2 142);
+  --primary: oklch(0.6 0.15 230);
   --primary-foreground: oklch(0.12 0.01 231.5);
   --secondary: oklch(0.25 0.02 142);
   --secondary-foreground: oklch(0.95 0.01 231.5);
