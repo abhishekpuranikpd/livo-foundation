@@ -132,108 +132,109 @@ export default function ObjectivesSection() {
     <section
       id="objectives"
       ref={sectionRef}
-      className="relative w-full scroll-mt-28 py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background via-blue-50/30 to-background overflow-hidden"
+      className="relative w-full scroll-mt-28 py-20 lg:py-32 px-4 sm:px-6 lg:px-8 bg-background overflow-hidden"
     >
-      {/* Background glow */}
-      <div className="absolute top-0 right-0 w-80 h-80 bg-primary/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-80 h-80 bg-accent/5 rounded-full blur-3xl" />
+      {/* Decorative background accents */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
 
       <div className="relative z-10 max-w-7xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-10">
-          <span className="px-5 py-2 rounded-full bg-primary/10 text-primary text-sm font-bold">
-            Our Foundation
-          </span>
-          <h2 className="text-3xl md:text-4xl font-bold mt-4 mb-2 bg-gradient-to-r from-primary via-blue-600 to-accent bg-clip-text text-transparent">
-            8 Core Objectives & Mission
+        <div className="text-center mb-16 lg:mb-24">
+          <div className="inline-block px-4 py-1.5 bg-primary/10 rounded-full text-primary font-bold text-xs tracking-widest uppercase mb-6">
+            Our Mission
+          </div>
+          <h2 className="text-4xl lg:text-5xl font-extrabold text-foreground mb-6">
+            Our 8 Core <span className="text-primary">Objectives</span>
           </h2>
-          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
-            Comprehensive initiatives transforming lives through healthcare, education, and community empowerment.
-          </p>
+          <div className="w-20 h-1 bg-accent mx-auto rounded-full"></div>
         </div>
 
-        {/* Objectives Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+        {/* Objectives Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
           {objectives.map((objective, index) => {
             const Icon = objective.icon
             return (
               <div
                 key={objective.id}
-                className={`group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-500 border border-blue-100 hover:border-primary/50 h-64 cursor-pointer ${
-                  isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-                }`}
-                style={{ transitionDelay: isVisible ? `${index * 80}ms` : "0ms" }}
+                className="group relative bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-gray-100 flex flex-col h-72"
+                style={{ transitionDelay: `${index * 50}ms` }}
               >
                 <Image
                   src={objective.image}
                   alt={objective.title}
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                  className="object-cover group-hover:scale-110 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-                <div className={`absolute top-4 right-4 p-2 rounded-lg bg-gradient-to-br ${objective.color}`}>
-                  <Icon className="w-5 h-5 text-white" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#003c3c]/90 via-[#003c3c]/40 to-transparent" />
+                
+                {/* Icon Badge */}
+                <div className="absolute top-4 left-4 w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center border border-white/20">
+                  <Icon className="w-6 h-6 text-white" />
                 </div>
-                <div className="absolute inset-0 flex flex-col justify-end p-4 text-white">
-                  <h3 className="text-base font-semibold mb-1">{objective.title}</h3>
-                  <p className="text-xs sm:text-sm text-white/90 line-clamp-3 leading-relaxed">{objective.description}</p>
+
+                <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
+                  <h3 className="text-xl font-bold mb-2 group-hover:text-accent transition-colors">
+                    {objective.title}
+                  </h3>
+                  <p className="text-sm text-white/80 font-medium line-clamp-2 leading-relaxed">
+                    {objective.description}
+                  </p>
                 </div>
               </div>
             )
           })}
         </div>
 
-        {/* Detailed Overview */}
-        <div className="bg-gradient-to-br from-blue-50 to-blue-100/40 rounded-2xl p-6 md:p-8 border border-blue-200 shadow-sm mb-10">
-          <h3 className="text-xl md:text-2xl font-bold mb-8 text-gray-900 text-center">
-            Detailed Objectives Overview
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {objectives.map((objective, index) => {
-              const Icon = objective.icon
-              return (
-                <div
-                  key={objective.id}
-                  className={`flex items-start gap-3 p-3 rounded-xl bg-white border border-blue-200 hover:border-primary/50 hover:shadow-md transition-all duration-300 ${
-                    isVisible ? "translate-x-0 opacity-100" : "-translate-x-8 opacity-0"
-                  }`}
-                  style={{ transitionDelay: isVisible ? `${index * 60}ms` : "0ms" }}
-                >
-                  <div className={`flex-shrink-0 p-2 rounded-md bg-gradient-to-br ${objective.color}`}>
-                    <Icon className="w-4 h-4 text-white" />
+        {/* Detailed List Section */}
+        <div className="bg-secondary rounded-[3rem] p-8 lg:p-16 border border-gray-100 shadow-sm mb-20">
+          <div className="max-w-4xl mx-auto">
+            <h3 className="text-3xl font-extrabold text-foreground mb-12 text-center">
+              Strategic Focus & Operations
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {objectives.map((objective, index) => {
+                const Icon = objective.icon
+                return (
+                  <div
+                    key={objective.id}
+                    className="flex items-start gap-5 p-6 rounded-2xl bg-white shadow-sm border border-gray-50 hover:shadow-md transition-all duration-300"
+                  >
+                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-primary/5 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all">
+                      <Icon className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-foreground mb-2">{objective.title}</h4>
+                      <p className="text-sm text-muted-foreground font-medium leading-relaxed">{objective.fullText}</p>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900 mb-1 text-sm">
-                      {objective.title}
-                    </h4>
-                    <p className="text-xs text-gray-700 leading-relaxed">{objective.fullText}</p>
-                  </div>
-                </div>
-              )
-            })}
+                )
+              })}
+            </div>
           </div>
         </div>
 
-        {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+        {/* Impact Stats Banner */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {[ 
-            { label: "Healthcare Programs", value: "50+", icon: Stethoscope },
-            { label: "Training Centers", value: "15+", icon: BookOpen },
-            { label: "Communities Served", value: "100+", icon: Users },
-            { label: "Lives Transformed", value: "50,000+", icon: CheckCircle2 },
+            { label: "Programs", value: "50+", icon: Stethoscope },
+            { label: "Centers", value: "15+", icon: BookOpen },
+            { label: "Communities", value: "100+", icon: Users },
+            { label: "Lives", value: "50K+", icon: CheckCircle2 },
           ].map((stat, index) => {
             const StatIcon = stat.icon
             return (
               <div
                 key={index}
-                className={`p-4 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/20 text-center transition-all duration-500 hover:shadow-md hover:scale-105 ${
-                  isVisible ? "scale-100 opacity-100" : "scale-95 opacity-0"
-                }`}
-                style={{ transitionDelay: isVisible ? `${(index + 8) * 80}ms` : "0ms" }}
+                className="text-center space-y-3 p-6 rounded-3xl bg-white shadow-sm border border-gray-100 hover:shadow-lg transition-all"
               >
-                <StatIcon className="w-5 h-5 text-primary mx-auto mb-1" />
-                <p className="text-xl md:text-2xl font-bold text-primary mb-0.5">{stat.value}</p>
-                <p className="text-xs md:text-sm text-gray-600 font-semibold">{stat.label}</p>
+                <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center text-accent mx-auto">
+                  <StatIcon size={24} />
+                </div>
+                <div>
+                  <p className="text-3xl font-black text-primary">{stat.value}</p>
+                  <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest">{stat.label}</p>
+                </div>
               </div>
             )
           })}

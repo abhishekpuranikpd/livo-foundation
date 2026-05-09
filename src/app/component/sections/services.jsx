@@ -86,65 +86,69 @@ export default function ServicesSection() {
     <section
       ref={sectionRef}
       id="services"
-      className="relative w-full scroll-mt-28 py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background via-blue-50/20 to-background overflow-hidden"
+      className="relative w-full scroll-mt-28 py-20 lg:py-32 px-4 sm:px-6 lg:px-8 bg-background overflow-hidden"
     >
-      {/* Soft background accents */}
-      <div className="absolute top-0 left-0 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 right-0 w-72 h-72 bg-accent/5 rounded-full blur-3xl" />
+      {/* Decorative background accents */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
 
       <div className="relative z-10 max-w-7xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-10">
-          <span className="px-5 py-2 rounded-full bg-primary/10 text-primary text-sm font-bold">
-            What We Offer
-          </span>
-          <h2 className="text-3xl md:text-4xl font-bold mt-4 mb-2 bg-gradient-to-r from-primary via-blue-600 to-accent bg-clip-text text-transparent">
-            Our Services & Programs
+        <div className="text-center mb-16 lg:mb-24">
+          <div className="inline-block px-4 py-1.5 bg-primary/10 rounded-full text-primary font-bold text-xs tracking-widest uppercase mb-6">
+            What We Do
+          </div>
+          <h2 className="text-4xl lg:text-5xl font-extrabold text-foreground mb-6">
+            Our Key <span className="text-primary">Focus Areas</span>
           </h2>
-          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
-            Compassion-driven initiatives transforming healthcare, nutrition,
-            and community well-being across India.
-          </p>
+          <div className="w-20 h-1 bg-accent mx-auto rounded-full"></div>
         </div>
 
         {/* Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => {
             const Icon = service.icon;
             return (
               <div
                 key={service.id}
-                className={`group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-500 border border-blue-100 hover:border-primary/50 h-64 cursor-pointer`}
+                className="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-gray-100 flex flex-col h-full"
                 style={{
-                  transitionDelay: `${index * 80}ms`,
+                  transitionDelay: `${index * 50}ms`,
                 }}
               >
-                {/* Image and Overlay */}
-                <div className="relative h-full bg-gradient-to-br from-blue-100 to-blue-50">
+                {/* Visual Header */}
+                <div className="relative h-56 overflow-hidden">
                   <Image
                     src={service.image || "/placeholder.svg"}
                     alt={service.title}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                    className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-
-                  {/* Icon */}
-                  <div
-                    className={`absolute top-4 right-4 p-2 rounded-lg bg-gradient-to-br ${service.color}`}
-                  >
-                    <Icon className="w-5 h-5 text-white" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  
+                  {/* Icon Badge */}
+                  <div className="absolute top-6 left-6 w-14 h-14 bg-white rounded-2xl shadow-lg flex items-center justify-center transform -rotate-3 group-hover:rotate-0 transition-transform duration-500">
+                    <Icon className="w-7 h-7 text-primary" />
                   </div>
                 </div>
 
                 {/* Content */}
-                <div className="absolute inset-0 flex flex-col justify-end p-4 text-white">
-                  <h3 className="text-base font-semibold mb-1">
+                <div className="p-8 flex flex-col flex-grow">
+                  <h3 className="text-2xl font-bold text-foreground mb-4 group-hover:text-primary transition-colors duration-300">
                     {service.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-white/90 line-clamp-3 leading-relaxed">
+                  <p className="text-muted-foreground font-medium leading-relaxed mb-6 flex-grow">
                     {service.description}
                   </p>
+                  
+                  <div className="pt-4 border-t border-gray-50 flex items-center justify-between">
+                    <button className="text-primary font-bold text-sm tracking-widest uppercase hover:text-accent transition-colors">
+                      Learn More
+                    </button>
+                    <div className="w-8 h-8 rounded-full bg-primary/5 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                      <Icon className="w-4 h-4" />
+                    </div>
+                  </div>
                 </div>
               </div>
             );

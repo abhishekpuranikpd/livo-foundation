@@ -39,45 +39,81 @@ export default function Navigation({ onNavigate }) {
   }, []);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm">
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-14 sm:h-16">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md border-b border-gray-100">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16 sm:h-20">
 
-          {/* Logo Section */}
-          <div className="flex-shrink-0 flex items-center gap-3">
-            <Image src="https://gpo7e0fz6e.ufs.sh/f/KD5H5HN5C4X1mVOolZKrBAan0liRZoh25vKJT83XwkbFYQ7I" alt="LIVO Foundation Logo" width={120} height={80} className="w-[100px] sm:w-[120px] h-auto" priority />
-            <Image src="https://gpo7e0fz6e.ufs.sh/f/KD5H5HN5C4X1nXbvAYt2bOKkEz3IciJBo26URH89l1jLqugG" alt="Aarogyadhan Logo" width={120} height={80} className="w-[100px] sm:w-[120px] h-auto" priority />
+          <div className="flex-shrink-0 flex items-center gap-4">
+            <div className="relative h-12 sm:h-14 w-auto flex items-center gap-4">
+              <Image 
+                src="https://gpo7e0fz6e.ufs.sh/f/KD5H5HN5C4X1mVOolZKrBAan0liRZoh25vKJT83XwkbFYQ7I" 
+                alt="LIVO Foundation Logo" 
+                width={120} 
+                height={60} 
+                className="h-full w-auto object-contain" 
+                priority 
+              />
+              <div className="h-8 w-px bg-gray-200 hidden sm:block"></div>
+              <Image 
+                src="https://gpo7e0fz6e.ufs.sh/f/KD5H5HN5C4X1nXbvAYt2bOKkEz3IciJBo26URH89l1jLqugG" 
+                alt="Aarogyadhan Logo" 
+                width={100} 
+                height={50} 
+                className="h-4/5 w-auto object-contain" 
+                priority 
+              />
+            </div>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-2">
+          <div className="hidden lg:flex items-center gap-1">
             {navItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => onNavigate(item.id)}
-                className={`px-3 py-1.5 rounded-md text-[14px] font-semibold transition ${
+                className={`px-4 py-2 text-[15px] font-semibold transition-all duration-300 relative group ${
                   activeSection === item.id
-                    ? "bg-blue-600 text-white"
-                    : "text-gray-800 hover:bg-gray-100"
+                    ? "text-primary"
+                    : "text-foreground hover:text-primary"
                 }`}
               >
                 {item.label}
+                <span className={`absolute bottom-1 left-4 right-4 h-0.5 bg-primary transform transition-transform duration-300 ${
+                  activeSection === item.id ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+                }`}></span>
               </button>
             ))}
+            
+            <button
+              onClick={() => onNavigate("contact")}
+              className="ml-4 px-6 py-2 bg-primary text-white rounded-full font-bold text-sm hover:bg-primary/90 transition-all shadow-md hover:shadow-lg active:scale-95"
+            >
+              DONATE
+            </button>
           </div>
 
           {/* Mobile Menu Toggle */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-1.5 text-gray-700"
-          >
-            {isOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
+          <div className="lg:hidden flex items-center gap-4">
+            <button
+              onClick={() => onNavigate("contact")}
+              className="px-4 py-1.5 bg-primary text-white rounded-full font-bold text-xs shadow-sm"
+            >
+              DONATE
+            </button>
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="p-2 text-foreground hover:bg-gray-100 rounded-lg transition"
+            >
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Menu */}
-        {isOpen && (
-          <div className="md:hidden bg-white border-t border-gray-100">
+        <div className={`lg:hidden absolute top-full left-0 right-0 bg-white shadow-xl transition-all duration-300 overflow-hidden ${
+          isOpen ? "max-h-[500px] border-t border-gray-100" : "max-h-0"
+        }`}>
+          <div className="px-4 py-4 space-y-1">
             {navItems.map((item) => (
               <button
                 key={item.id}
@@ -85,17 +121,17 @@ export default function Navigation({ onNavigate }) {
                   onNavigate(item.id);
                   setIsOpen(false);
                 }}
-                className={`w-full text-left px-4 py-2 text-[14px] font-medium transition ${
+                className={`w-full text-left px-4 py-3 text-[16px] font-semibold rounded-lg transition ${
                   activeSection === item.id
-                    ? "bg-blue-600 text-white"
-                    : "text-gray-800 hover:bg-gray-100"
+                    ? "bg-secondary text-primary"
+                    : "text-foreground hover:bg-gray-50"
                 }`}
               >
                 {item.label}
               </button>
             ))}
           </div>
-        )}
+        </div>
       </div>
     </nav>
   );

@@ -48,78 +48,89 @@ export default function AboutSection() {
     <section
       ref={sectionRef}
       id="about"
-      className="relative w-full scroll-mt-28 py-14 md:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background via-blue-50/20 to-background overflow-hidden"
+      className="relative w-full scroll-mt-28 py-20 lg:py-32 px-4 sm:px-6 lg:px-8 bg-secondary overflow-hidden"
     >
-      {/* Background accents */}
-      <div className="absolute top-0 left-0 w-56 h-56 bg-primary/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 right-0 w-56 h-56 bg-accent/10 rounded-full blur-3xl" />
+      {/* Decorative background accents */}
+      <div className="absolute -top-24 -left-24 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+      <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
 
       <div className="relative z-10 max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-10">
-          <span className="px-5 py-2 rounded-full bg-primary/10 text-primary text-sm font-bold">
-            Who We Are
-          </span>
-          <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-2 bg-gradient-to-r from-primary via-blue-600 to-accent bg-clip-text text-transparent leading-tight">
-            About LIVO Foundation
-          </h2>
-          <p className="text-sm md:text-base text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            A non-profit organization transforming healthcare access, nutrition,
-            and dignity for underprivileged communities across India.
-          </p>
-        </div>
-
-        {/* About Info + Slideshow */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-14">
-          {/* Text Content */}
-          <div className="space-y-4">
-            <p className="text-gray-700 text-sm md:text-base leading-relaxed">
-              LIVO Foundation works to ensure healthcare is not a privilege but
-              a right. We empower marginalized communities through medical
-              support, nutrition programs, and dignity-driven social
-              initiatives.
-            </p>
-            <p className="text-gray-700 text-sm md:text-base leading-relaxed">
-              Our mission is to build a compassionate ecosystem that bridges
-              healthcare disparities and creates sustainable impact across rural
-              and urban areas.
-            </p>
-
-            {/* Stats */}
-            <div className="grid grid-cols-2 gap-4 pt-3">
-              <div className="flex flex-col items-center justify-center p-3 h-20 bg-gradient-to-br from-primary/10 to-primary/5 rounded-lg border border-primary/20 shadow-sm">
-                <p className="text-xl font-bold text-primary">50,000+</p>
-                <p className="text-xs text-gray-700 mt-1 font-medium text-center">
-                  Lives Impacted
-                </p>
-              </div>
-              <div className="flex flex-col items-center justify-center p-3 h-20 bg-gradient-to-br from-accent/10 to-accent/5 rounded-lg border border-accent/20 shadow-sm">
-                <p className="text-xl font-bold text-accent">15+</p>
-                <p className="text-xs text-gray-700 mt-1 font-medium text-center">
-                  Years of Service
-                </p>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          
+          {/* Visual Side */}
+          <div className="relative order-2 lg:order-1">
+            <div className="relative aspect-[4/3] rounded-[2rem] overflow-hidden shadow-2xl border-8 border-white">
+              {aboutImages.map((image, index) => (
+                <div
+                  key={index}
+                  className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                    index === currentImageIndex ? "opacity-100" : "opacity-0"
+                  }`}
+                >
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    className="object-cover transform hover:scale-105 transition-transform duration-700"
+                    priority={index === 0}
+                  />
+                </div>
+              ))}
+            </div>
+            {/* Floating Achievement Badge */}
+            <div className="absolute -bottom-8 -right-8 bg-white p-6 rounded-3xl shadow-xl border border-gray-100 hidden sm:block animate-float">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center">
+                  <span className="text-accent font-bold text-xl">6+</span>
+                </div>
+                <div>
+                  <p className="text-sm font-extrabold text-foreground">YEARS OF</p>
+                  <p className="text-xs text-muted-foreground font-bold uppercase tracking-wider">dedication</p>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Slideshow */}
-          <div className="relative h-48 md:h-64 rounded-xl overflow-hidden shadow-md border border-blue-100">
-            {aboutImages.map((image, index) => (
-              <div
-                key={index}
-                className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-                  index === currentImageIndex ? "opacity-100" : "opacity-0"
-                }`}
-              >
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  fill
-                  className="object-cover"
-                  priority={index === 0}
-                />
+          {/* Content Side */}
+          <div className="space-y-8 order-1 lg:order-2">
+            <div>
+              <div className="inline-block px-4 py-1.5 bg-primary/10 rounded-full text-primary font-bold text-xs tracking-widest uppercase mb-6">
+                About Our Journey
               </div>
-            ))}
+              <h2 className="text-4xl lg:text-5xl font-extrabold text-foreground mb-8 leading-tight">
+                Empowering <span className="text-primary">India</span> Through Care & Compassion
+              </h2>
+              <div className="w-20 h-1 bg-accent rounded-full mb-8"></div>
+            </div>
+
+            <div className="space-y-6 text-lg text-muted-foreground leading-relaxed font-medium">
+              <p>
+                LIVO Foundation is a non-profit organization dedicated to ensuring that healthcare is not a privilege but a fundamental right for every citizen.
+              </p>
+              <p>
+                We bridge the gap in healthcare disparities by providing medical support, nutrition programs, and hygiene initiatives to marginalized communities across the nation.
+              </p>
+            </div>
+
+            {/* Core Values / Stats */}
+            <div className="grid grid-cols-2 gap-6 py-4">
+              <div className="p-4 rounded-2xl bg-white shadow-sm border border-gray-100">
+                <h4 className="text-primary font-extrabold text-xl mb-1">Our Vision</h4>
+                <p className="text-sm text-muted-foreground font-medium">Sustainable healthcare for all underserved communities.</p>
+              </div>
+              <div className="p-4 rounded-2xl bg-white shadow-sm border border-gray-100">
+                <h4 className="text-accent font-extrabold text-xl mb-1">Our Mission</h4>
+                <p className="text-sm text-muted-foreground font-medium">Providing dignity through health and empowerment.</p>
+              </div>
+            </div>
+
+            <div className="pt-4">
+              <button
+                className="px-8 py-3.5 bg-primary text-white rounded-full font-bold hover:bg-primary/90 transition-all shadow-lg hover:shadow-primary/40 active:scale-95"
+              >
+                KNOW MORE
+              </button>
+            </div>
           </div>
         </div>
       </div>

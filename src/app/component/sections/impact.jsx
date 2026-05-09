@@ -37,16 +37,26 @@ function CounterStat({ value, label, icon: Icon, delay = 0 }) {
   return (
     <div
       ref={ref}
-      className="group p-3 rounded-lg bg-gradient-to-br from-white to-blue-50 border border-blue-200 shadow-sm hover:shadow-md transition-all duration-300 transform hover:scale-105 text-center flex-1 min-w-[120px] sm:min-w-[140px] md:min-w-[160px]"
+      className="group flex flex-col items-center text-center p-6 transition-all duration-500"
       style={{ transitionDelay: `${delay}ms` }}
     >
-      <div className="mb-2 inline-block p-2 rounded-md bg-gradient-to-br from-primary/15 to-primary/10 group-hover:from-primary/25 group-hover:to-primary/15 transition-all duration-300">
-        <Icon className="w-5 h-5 text-primary" />
+      <div className="mb-6 relative">
+        {/* Circular Icon Container */}
+        <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-white shadow-lg flex items-center justify-center relative z-10 group-hover:scale-110 transition-transform duration-500 border border-gray-100">
+          <Icon className="w-8 h-8 sm:w-10 sm:h-10 text-primary group-hover:text-accent transition-colors duration-500" />
+        </div>
+        {/* Animated Background Ring */}
+        <div className="absolute inset-0 rounded-full bg-primary/5 group-hover:bg-accent/10 scale-125 transition-all duration-500 blur-sm"></div>
       </div>
-      <p className="text-xl md:text-2xl font-bold text-primary mb-0.5">
-        {count}{suffix}
-      </p>
-      <p className="text-xs md:text-sm text-gray-600 font-semibold">{label}</p>
+      
+      <div className="space-y-1">
+        <p className="text-2xl sm:text-3xl font-extrabold text-foreground tracking-tight">
+          {count}{suffix}
+        </p>
+        <p className="text-xs sm:text-sm text-muted-foreground font-bold uppercase tracking-wider">
+          {label}
+        </p>
+      </div>
     </div>
   )
 }
@@ -55,56 +65,42 @@ export default function ImpactSection() {
   const sectionRef = useRef(null)
 
   const impactStats = [
-    { label: "Lives Impacted", value: "10000+", icon: Heart },
+    { label: "Lives Impacted", value: "10M+", icon: Heart },
     { label: "Health Camps", value: "150+", icon: Stethoscope },
-    { label: "Free Surgery & Treatment", value: "10000+", icon: Building2 },
-    { label: "Pads Distributed", value: "500000+", icon: Flower2 },
-    { label: "Animals Treated", value: "1000+", icon: PawPrint },
-    { label: "Years of Service", value: "+6", icon: Users },
-    { label: "Healthcare Support", value: "10000+", icon: Heart },
-    { label: "Nutrition Programs", value: "500+", icon: Apple },
-    { label: "Community Empowerment", value: "1000+", icon: Users },
+    { label: "Free Surgeries", value: "10K+", icon: Building2 },
+    { label: "Pads Distributed", value: "500K+", icon: Flower2 },
+    { label: "Animals Treated", value: "1K+", icon: PawPrint },
+    { label: "Years of Service", value: "6+", icon: Users },
   ]
 
   return (
     <section
       ref={sectionRef}
       id="impact"
-      className="relative w-full scroll-mt-28 py-16 md:py-20 px-4 bg-gradient-to-b from-background via-blue-50/30 to-background overflow-hidden"
+      className="relative w-full py-20 lg:py-32 px-4 bg-background overflow-hidden"
     >
-      {/* Background glow */}
-      <div className="absolute top-0 right-0 w-80 h-80 bg-primary/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-80 h-80 bg-accent/5 rounded-full blur-3xl" />
+      {/* Decorative background text */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[20vw] font-black text-black/[0.02] select-none pointer-events-none whitespace-nowrap">
+        OUR IMPACT
+      </div>
 
       <div className="relative z-10 max-w-7xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-10">
-          <span className="px-5 py-2 rounded-full bg-primary/10 text-primary text-sm font-bold">
-            Our Achievement
-          </span>
-          <h2 className="text-3xl md:text-4xl font-bold mt-4 mb-2 bg-gradient-to-r from-primary via-blue-600 to-accent bg-clip-text text-transparent">
-            Our Impact & Reach
+        <div className="text-center mb-16 lg:mb-24">
+          <div className="inline-block px-4 py-1.5 bg-primary/10 rounded-full text-primary font-bold text-xs tracking-widest uppercase mb-4">
+            Our Footprint
+          </div>
+          <h2 className="text-4xl lg:text-5xl font-extrabold text-foreground mb-6">
+            Impact <span className="text-primary">Every Day</span>
           </h2>
-          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
-            Transforming lives through healthcare, nutrition, and community empowerment across India.
-          </p>
+          <div className="w-20 h-1 bg-accent mx-auto rounded-full"></div>
         </div>
 
-        {/* Responsive Two Rows */}
-        <div className="flex flex-col items-center gap-6">
-          {/* Row 1: 5 cards (wrap on smaller screens) */}
-          <div className="flex flex-wrap justify-center md:justify-between w-full max-w-6xl gap-x-3 gap-y-6">
-            {impactStats.slice(0, 5).map((stat, index) => (
-              <CounterStat key={index} {...stat} delay={index * 100} />
-            ))}
-          </div>
-
-          {/* Row 2: 4 cards (wrap on smaller screens) */}
-          <div className="flex flex-wrap justify-center md:justify-between w-full max-w-5xl gap-x-3 gap-y-6">
-            {impactStats.slice(5, 9).map((stat, index) => (
-              <CounterStat key={index + 5} {...stat} delay={(index + 5) * 100} />
-            ))}
-          </div>
+        {/* Impact Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-4">
+          {impactStats.map((stat, index) => (
+            <CounterStat key={index} {...stat} delay={index * 100} />
+          ))}
         </div>
       </div>
     </section>

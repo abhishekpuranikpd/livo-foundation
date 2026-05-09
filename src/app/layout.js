@@ -1,10 +1,9 @@
-import { Geist, Geist_Mono } from "next/font/google"
+import { Noto_Sans } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { Toaster } from "react-hot-toast"   
 import "./globals.css"
 
-const _geist = Geist({ subsets: ["latin"] })
-const _geistMono = Geist_Mono({ subsets: ["latin"] })
+const noto_sans = Noto_Sans({ subsets: ["latin"] })
 
 export const metadata = {
   title: "LIVO Foundation - Healthcare & Wellness",
@@ -16,7 +15,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`font-sans antialiased`}>
+      <body className={`${noto_sans.className} antialiased`}>
         {children}
 
         {/* Global toast container */}
